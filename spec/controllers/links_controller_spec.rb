@@ -30,10 +30,6 @@ describe LinksController do
     expect(response).to render_template :new
     end
 
-# it 'should assign  @link' do
-# expect(assigns(:link)).class
-# end
-
 end
 
   describe '#create' do
@@ -68,6 +64,18 @@ describe '#destroy' do
     expect{
       delete :destroy, id: link.id
     }.to change(Link, :count).by(-1)
+  end
+end
+
+describe '#update' do
+  it 'should update a link' do
+    link
+    new_link = {title: "new title", url: "newurl"}
+    put :update, id: link.id, link: new_link
+
+    link.reload
+    link.title.should == new_link[:title]
+    link.url.should == new_link[:url]
   end
 end
 

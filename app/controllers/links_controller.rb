@@ -21,6 +21,12 @@ class LinksController < ApplicationController
     @link = Link.find(params[:id])
   end
 
+  def update
+    @link = Link.find(params[:id])
+    @link.update_attributes(params[:link])
+    render :show
+  end
+
   def destroy
     link= Link.find(params[:id])
     link.delete
